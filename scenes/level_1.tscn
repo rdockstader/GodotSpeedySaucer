@@ -1,11 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://d3n7xf8dkgqej"]
+[gd_scene load_steps=5 format=3 uid="uid://d3n7xf8dkgqej"]
 
 [ext_resource type="Texture2D" uid="uid://ddq0u7ykekac5" path="res://assets/purple.png" id="1_4elil"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_r81u8"]
 [ext_resource type="PackedScene" uid="uid://c4vy88kr61epb" path="res://scenes/player.tscn" id="2_or2iq"]
+[ext_resource type="PackedScene" uid="uid://c3l3tgrbf75ph" path="res://scenes/maze.tscn" id="4_3vfvh"]
 
 [node name="Level1" type="Node2D"]
+script = ExtResource("1_r81u8")
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="CanvasLayer"]
 z_index = -100
 offset_left = -20.0
 offset_top = -20.0
@@ -17,3 +23,35 @@ stretch_mode = 1
 [node name="Player" parent="." instance=ExtResource("2_or2iq")]
 z_index = 5
 position = Vector2(443, 193)
+
+[node name="Maze" parent="." instance=ExtResource("4_3vfvh")]
+position = Vector2(587, 228)
+
+[node name="StartLabel" type="Label" parent="."]
+offset_left = 423.0
+offset_top = 136.0
+offset_right = 463.0
+offset_bottom = 159.0
+text = "Start"
+
+[node name="EndLabel" type="Label" parent="."]
+offset_left = 772.0
+offset_top = 109.0
+offset_right = 818.0
+offset_bottom = 132.0
+text = "Finish"
+
+[node name="TutorialLabel" type="Label" parent="."]
+offset_left = 136.0
+offset_top = 216.0
+offset_right = 390.0
+offset_bottom = 378.0
+text = "Rules:
+1 - You must stay in the track
+2 - Use Up, Down Left and Right
+or W A S D to move your saucer
+3 - Go from the start to the finish
+4 - If you leave the track you
+will have to start over!"
+
+[connection signal="body_exited" from="Maze" to="." method="_on_maze_body_exited"]

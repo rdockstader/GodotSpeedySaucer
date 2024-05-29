@@ -1,15 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4vy88kr61epb"]
+[gd_scene load_steps=4 format=3 uid="uid://c4vy88kr61epb"]
 
 [ext_resource type="Texture2D" uid="uid://dixrcbjq4xnxb" path="res://assets/ufoGreen.png" id="1_f4lkr"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="1_q072q"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_41g3a"]
-radius = 45.0111
+radius = 7.07107
 
 [node name="Player" type="RigidBody2D"]
 gravity_scale = 1.66533e-16
+script = ExtResource("1_q072q")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_f4lkr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_41g3a")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
